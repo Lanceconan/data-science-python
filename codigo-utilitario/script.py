@@ -5,7 +5,7 @@
 Formato de Script de python
 Para ejecutar
 
-python script argumento1, argumento2, argumento3, ..., argumenton
+python script.py argumento1, argumento2, argumento3, ..., argumenton
 
 @autor Daniel Gutiérrez
 
