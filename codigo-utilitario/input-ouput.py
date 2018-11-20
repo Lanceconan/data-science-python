@@ -40,6 +40,76 @@ archivo = carpeta / "datos.csv"
 print(archivo.read_text())
 
 
+# leer la linea de un archivo con mayor longitud
+
+def leerLineaMayorLongitud(archivo):
+    lineaMayor = ''
+    longitudLineaMayor = 0
+
+    with open(archivo, "r") as fname:
+        lineas = fname.readlines()
+        for linea in lineas:
+            if(len(linea) > longitudLineaMayor):
+                lineaMayor = linea
+                longitudLineaMayor = len(linea)
+    
+    return lineaMayor
+
+carpetaLectura = Path("./data/")
+archivoLectura = carpetaLectura / "datos.csv"
+
+print("La mayor Linea es: ", leerLineaMayorLongitud(archivoLectura))
+
+# Método para leer las últimas n lineas
+def leerEneLineas(archivo, n):
+    nlineas = []
+    with open(archivo, "r") as fname:
+        lineas = fname.readlines()        
+        cardinal = len(lineas)    
+        tope = cardinal - n    
+        while(tope <= cardinal):
+            nlineas.append(lineas[tope-1])
+            tope+=1
+            
+
+    return nlineas
+
+carpetaLectura = Path("./data/")
+archivoLectura = carpetaLectura / "datos.csv"
+print(leerEneLineas(archivoLectura, 100))
 
 
+diccionarioEjercicio = {
+    "nombre" : ["Daniel", "Samuel", "Gustavo",  "Eduardo", "Guillermo"],
+    "edad" : [28, 25, 29, 28, 29],
+    "ciudad" : ["Calama", "Valdivia", "Antofagasta", "Copiapo", "Quintero"]
+}
+
+def escribirCsvFromDiccionario(archivo, diccionario):
+    
+    with open(archivo, "w") as fname:
+        column = list(diccionario.keys())
+        valueRows = list(diccionario.values())
+        
+        pivote = 0
+        
+        while(pivote < 3):
+            print(valueRows[pivote]) #fname.write
+            for value in valueRows[pivote]:
+                print(value)
+
+            pivote += 1
+
+    return True
+
+print("")
+print("")
+carpetaEscritura = Path("./data/")
+archivoEscritura = carpetaEscritura / "misAmigos.csv"
+
+print("")
+if(escribirCsvFromDiccionario(archivoEscritura, diccionarioEjercicio)):
+    print("Es escribió el archivo: ", archivoEscritura)
+else:
+    print("Ocurrió un error y no se escribió nada")
 
