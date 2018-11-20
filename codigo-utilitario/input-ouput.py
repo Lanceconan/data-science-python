@@ -80,9 +80,9 @@ print(leerEneLineas(archivoLectura, 100))
 
 
 diccionarioEjercicio = {
-    "nombre" : ["Daniel", "Samuel", "Gustavo",  "Eduardo", "Guillermo"],
-    "edad" : [28, 25, 29, 28, 29],
-    "ciudad" : ["Calama", "Valdivia", "Antofagasta", "Copiapo", "Quintero"]
+    "nombre"    : ["Daniel", "Samuel", "Gustavo",  "Eduardo", "Guillermo"],
+    "edad"      : [28, 25, 29, 28, 29],
+    "ciudad"    : ["Calama", "Valdivia", "Antofagasta", "Copiapo", "Quintero"]
 }
 
 def escribirCsvFromDiccionario(archivo, diccionario):
@@ -96,7 +96,7 @@ def escribirCsvFromDiccionario(archivo, diccionario):
         while(pivote < 3):
             print(valueRows[pivote]) #fname.write
             for value in valueRows[pivote]:
-                print(value)
+                fname.write(str(value))
 
             pivote += 1
 
