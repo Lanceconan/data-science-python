@@ -88,15 +88,27 @@ diccionarioEjercicio = {
 def escribirCsvFromDiccionario(archivo, diccionario):
     
     with open(archivo, "w") as fname:
-        column = list(diccionario.keys())
+        columns = list(diccionario.keys())
         valueRows = list(diccionario.values())
         
-        pivote = 0
         
-        while(pivote < 3):
-            print(valueRows[pivote]) #fname.write
-            for value in valueRows[pivote]:
-                fname.write(str(value))
+        for column in columns:
+            fname.write(column)
+            fname.write(',')
+        
+        fname.write('\n')
+        
+        pivote = 0
+        while(pivote < len(valueRows[0])):
+            pivote2 = 0
+            while(pivote2 < (len(columns))):
+                print(": ", valueRows[pivote2][pivote])
+                fname.write(str(valueRows[pivote2][pivote]))
+                fname.write(',')
+                pivote2+=1         
+
+            pivote2 = 0
+            fname.write('\n')    
 
             pivote += 1
 
