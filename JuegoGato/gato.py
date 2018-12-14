@@ -135,6 +135,8 @@ def main():
     
     printMenuJuego()
     print('Felicidades!!. Has Ganado el Juego: ' + turno[1])
+    print('')
+    input('Presiona Enter tecla para salir ...')
 
 
 # Ejecución de Método pricipal
