@@ -7,6 +7,47 @@ Created on Tue Dec 11 23:39:40 2018
 
 import os
 
+# Método para leer todos los archivos de un directorio
+def knowFiles(directory):
+    
+    lstFiles = []
+    arrayAllData = []
+    lstDir = os.walk(directory)            
+     
+    for root, dirs, files in lstDir:
+        for fichero in files:
+            (nombreFichero, extension) = os.path.splitext(fichero)
+            if(extension == ".csv"):
+                lstFiles.append(nombreFichero+extension)
+                arrayAllData.append(readFile(directory + '/' + nombreFichero + extension, 3))
+                    
+    return arrayAllData
+    
+
+# Método para leer datos de archivo y retorna un array 
+# modo 1: Hombres
+# modo 1: Mujeres
+# modo 3: Combinado    
+def readFile(addressFileYear, modo):
+    nameArrayYear = []
+    with open(addressFileYear, 'r') as fname:
+        lines = fname.readlines()
+        fileName, extension = os.path.splitext(addressFileYear)
+        nameArrayYear.append(fileName)
+        
+        for line in lines:
+            auxData = line.strip("\n").split(",")
+            
+            if(modo == 1):
+                nameArrayYear.append(auxData[0])
+            elif(modo == 2):
+                nameArrayYear.append(auxData[1])
+            else:    
+                nameArrayYear.append(auxData[0])
+                nameArrayYear.append(auxData[1])
+    
+    return nameArrayYear
+
 # Método para leer una opción válida del teclado
 def validateOption(option):
     try:
@@ -14,7 +55,21 @@ def validateOption(option):
     except ValueError:        
         return -1 
 
+# Método para validar el año ingresado es válido
+def validateYear(year):    
+    try:
+        validYear = int(float(year)) 
+        
+        if(year >= 2002 and year <= 2015):
+            return validYear
+        else:
+            return 0
+    
+    except ValueError:        
+        return -1 
+    
 
+# Método para limpiar la pantalla
 def cleanScreen():
     os.system('cls')
 
@@ -69,5 +124,6 @@ def main():
 
 
 
-# Ejecutar el Método principal
-main()
+# Ejecutar el programa principal
+#main()
+print(knowFiles('data/'))
