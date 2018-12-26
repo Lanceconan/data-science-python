@@ -36,15 +36,15 @@ def readFile(addressFileYear, modo):
         nameArrayYear.append(fileName)
         
         for line in lines:
-            auxData = line.strip("\n").split(",")
+            auxData = line.strip('\n').split(",")
             
             if(modo == 1):
-                nameArrayYear.append(auxData[0])
+                nameArrayYear.append(auxData[0].strip(' '))
             elif(modo == 2):
-                nameArrayYear.append(auxData[1])
+                nameArrayYear.append(auxData[1].strip(' '))
             else:    
-                nameArrayYear.append(auxData[0])
-                nameArrayYear.append(auxData[1])
+                nameArrayYear.append(auxData[0].strip(' '))
+                nameArrayYear.append(auxData[1].strip(' '))
     
     return nameArrayYear
 
@@ -126,4 +126,5 @@ def main():
 
 # Ejecutar el programa principal
 #main()
+#print(readFile('data/2005.csv', 1))
 print(knowFiles('data/'))
