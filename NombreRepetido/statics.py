@@ -6,6 +6,7 @@ Created on Tue Dec 11 23:39:40 2018
 """
 
 import os
+from collections import Counter
 
 # Método para leer todos los archivos de un directorio
 def knowFiles(directory):
@@ -18,7 +19,7 @@ def knowFiles(directory):
         for fichero in files:
             (nombreFichero, extension) = os.path.splitext(fichero)
             if(extension == ".csv"):
-                lstFiles.append(nombreFichero+extension)
+                lstFiles.append(nombreFichero + extension)
                 arrayAllData.append(readFile(directory + '/' + nombreFichero + extension, 3))
                     
     return arrayAllData
@@ -33,7 +34,7 @@ def readFile(addressFileYear, modo):
     with open(addressFileYear, 'r') as fname:
         lines = fname.readlines()
         fileName, extension = os.path.splitext(addressFileYear)
-        nameArrayYear.append(fileName)
+        nameArrayYear.append(fileName[-4:])
         
         for line in lines:
             auxData = line.strip('\n').split(",")
@@ -67,7 +68,10 @@ def validateYear(year):
     
     except ValueError:        
         return -1 
-    
+
+# Método para validar la entrada de un nombre
+def validateName(name):
+    return name.isalpha()    
 
 # Método para limpiar la pantalla
 def cleanScreen():
@@ -83,7 +87,8 @@ def printMenu():
     print('2. TopFive Masculino por Año Ingresado (2002 - 2015) Gráfico PNG Incluido')
     print('3. TopFive Femenino de los nombres Históricamente más usados (2002 - 2015) Gráfico PNG Incluido')
     print('3. TopFive Masculino de los nombres Históricamente más usados (2002 - 2015) Gráfico PNG Incluido')
-    print('4. Según el nombre ingresado revisar en que año fue el más popular y cuantos niños fueron llamados así')    
+    print('4. Mostrar en que año según el nombre ingresado fue el más popular y cuantos niños fueron llamados así')
+    print('5. Mostrar cuantos niños por año fueron llamados según un nombre ingresado')  
     print('')
     print('0. Salir')
     print('')
@@ -111,20 +116,56 @@ def main():
         
         if(option == 1):
             print('opcion 1')
+            input("\nTecla para continuar.... \n")
         
         elif(option == 2):
             print('opcion 2')
+            input("\nTecla para continuar.... \n")
         
         elif(option == 3):
             print('opcion 3')
+            input("\nTecla para continuar.... \n")
         
         elif(option == 4):
             print('opcion 4')
+            cleanScreen()
+            namesByYear = knowFiles('data/')    
+            # name = input('Ingresa un Nombre para saber cuando fue el más popular: ')          
+            # name = name.upper()            
+            # varCounter = 0
+            # varYear = 0
+            
+            # if(validateName(name)):                
+                
+            #     for nameUnit in namesByYear:
+            #         counter = Counter(nameUnit)
+            #         print(counter[name])
+            #         if(counter[name] > varCounter):
+            #             varYear = nameUnit[0]
+            #             varCounter = counter[name]
+
+            #     if(varYear == 0 or varCounter == 0):
+            #         print('')    
+            #         print('El nombre ' + name + ' no existe en los registros de los archivos')
+            #     else:
+            #         print('')    
+            #         print('Ha sido en el año ' + varYear + ' el nombre ' + name + ' el más popular con ' + varCounter + ' registros')
+
+            #     input("\nTecla para continuar.... \n")
+            # else:
+            #     print('No es un nombre válido')
+            #     input("\nTecla para volver al Menú Principal .... \n")
+
+        elif(option == 5):
+            print('opcion 5')
+            input("\nTecla para continuar.... \n")
+
 
 
 
 
 # Ejecutar el programa principal
-#main()
+main()
 #print(readFile('data/2005.csv', 1))
-print(knowFiles('data/'))
+#print(knowFiles('data/')[0])
+#input('LG')
