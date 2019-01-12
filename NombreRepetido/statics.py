@@ -7,9 +7,24 @@ Created on Tue Dec 11 23:39:40 2018
 
 import os
 from collections import Counter
+import numpy as np
+import matplotlib
+import matplotlib.pyplot as plt
+
+# Método para dibujar un gráfico y guardarlo en la ubicación donde se ejecuta
+def drawAndPrintGraphic(dataset, titlex, tittley):
+    matplotlib.rcParams.update({'font.size': 18})
+    ax = plt.gca()
+    
+    for i in range(10):
+        ax.bar(i, np.random.randint(1000))
+
+    plt.ylabel(tittley)
+    plt.xlabel(titlex)
+    plt.savefig("Ejemplo1.png")
 
 # Método para leer todos los archivos de un directorio
-def knowFiles(directory):
+def getDataFiles(directory):
     
     lstFiles = []
     arrayAllData = []
@@ -24,8 +39,17 @@ def knowFiles(directory):
                     
     return arrayAllData
     
+# Método para estandarizar el separador de las linea extraidas desde los csv
+def standarizeLine(line):
+    replacements = (',', ';')
+    for r in replacements:
+        line = line.replace(r, ';')
+    
+    return line.strip('\n').split(";")
 
-# Método para leer datos de archivo y retorna un array 
+# Método para leer datos de archivo 
+# Retorna un array con todo los nombres según sea el caso
+#
 # modo 1: Hombres
 # modo 1: Mujeres
 # modo 3: Combinado    
@@ -35,18 +59,18 @@ def readFile(addressFileYear, modo):
         lines = fname.readlines()
         fileName, extension = os.path.splitext(addressFileYear)
         nameArrayYear.append(fileName[-4:])
-        
+                
         for line in lines:
-            auxData = line.strip('\n').split(",")
-            
+            auxData = standarizeLine(line)            
+                        
             if(modo == 1):
                 nameArrayYear.append(auxData[0].strip(' '))
             elif(modo == 2):
                 nameArrayYear.append(auxData[1].strip(' '))
-            else:    
+            else:                        
                 nameArrayYear.append(auxData[0].strip(' '))
                 nameArrayYear.append(auxData[1].strip(' '))
-    
+
     return nameArrayYear
 
 # Método para leer una opción válida del teclado
@@ -129,32 +153,32 @@ def main():
         elif(option == 4):
             print('opcion 4')
             cleanScreen()
-            namesByYear = knowFiles('data/')    
-            # name = input('Ingresa un Nombre para saber cuando fue el más popular: ')          
-            # name = name.upper()            
-            # varCounter = 0
-            # varYear = 0
+            namesByYear = getDataFiles('data/')    
+            name = input('ingresa un nombre para saber cuando fue el más popular: ')          
+            name = name.upper()            
+            varcounter = 0
+            varyear = 0
             
-            # if(validateName(name)):                
-                
-            #     for nameUnit in namesByYear:
-            #         counter = Counter(nameUnit)
-            #         print(counter[name])
-            #         if(counter[name] > varCounter):
-            #             varYear = nameUnit[0]
-            #             varCounter = counter[name]
+            if(validateName(name)):                
+               
+                for nameunit in namesByYear:
+                    countNames = Counter(nameunit)
+                    
+                    if(countNames[name] > varcounter):
+                        varyear = nameunit[0]
+                        varcounter = countNames[name]
 
-            #     if(varYear == 0 or varCounter == 0):
-            #         print('')    
-            #         print('El nombre ' + name + ' no existe en los registros de los archivos')
-            #     else:
-            #         print('')    
-            #         print('Ha sido en el año ' + varYear + ' el nombre ' + name + ' el más popular con ' + varCounter + ' registros')
+                if(varyear == 0 or varcounter == 0):
+                    print('')    
+                    print('el nombre ' + name + ' no existe en los registros de los archivos')
+                else:
+                    print('')    
+                    print('ha sido en el año ' + str(varyear) + ' el nombre ' + name + ' el más popular con ' +  str(varcounter) + ' registros')
 
-            #     input("\nTecla para continuar.... \n")
-            # else:
-            #     print('No es un nombre válido')
-            #     input("\nTecla para volver al Menú Principal .... \n")
+                input("\ntecla para continuar.... \n")
+            else:
+                print('no es un nombre válido')
+                input("\ntecla para volver al menú principal .... \n")
 
         elif(option == 5):
             print('opcion 5')
@@ -166,6 +190,3 @@ def main():
 
 # Ejecutar el programa principal
 main()
-#print(readFile('data/2005.csv', 1))
-#print(knowFiles('data/')[0])
-#input('LG')

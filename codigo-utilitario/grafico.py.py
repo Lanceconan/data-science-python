@@ -27,5 +27,6 @@ ax2 = ax.twinx()
 for i in range(10):
     ax.bar(i, np.random.randint(1000))
 
-plt.ylabel('Datos')
+plt.ylabel('Datos y')
+plt.xlabel('Datos x')
 plt.savefig("Ejemplo1.png")
