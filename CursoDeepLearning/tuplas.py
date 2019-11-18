@@ -1,0 +1,4 @@
+# LAS TUPLAS SON LISTAS QUE NO PUEE SER EDITADAS Y EN LUGAR DE DEFINIRSE CON [] SE DEFINEN CON ()
+
+lista1 = ["Hola", False, 3.3, 5]
+tupla1 = ("Hola", False, 3.3, 5)
